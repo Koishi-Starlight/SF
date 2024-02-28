@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"math/rand"
 	"time"
 )
 
@@ -89,7 +90,7 @@ func strToRunes() {
 	runes := []rune(name)
 	fmt.Println(fmt.Sprintf("%#U", runes[0:4]))
 }
-func FizzBuzz() {
+func fizzBuzz() {
 	for i := 1; i < 100; i++ {
 		switch {
 		case i%15 == 0:
@@ -137,19 +138,25 @@ func line(a1, a2, b1, b2 float64) {
 	y = a1*x + b1
 	fmt.Printf("x:%f, y:%f\n", x, y)
 }
-func Fact(n int64) int64 {
+func fact(n int64) int64 {
 	res := int64(1)
 	for i := int64(1); 1 <= n; i++ {
 		res *= i
 	}
 	return res
 }
-func FactR(n int64) int64 {
+func factR(n int64) int64 {
 	if n < 2 {
 		return 1
 	}
-	return n * FactR(n-1)
+	return n * factR(n-1)
+}
+func shuffle() { //Apparent middle-level interview question
+	array := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	rand.Seed(time.Now().UnixNano()) //Not sure why we need this
+	rand.Shuffle(len(array), func(i, j int) { array[i], array[j] = array[j], array[i] })
+	fmt.Println(array)
 }
 func main() {
-	line(2, 3, 2, 3)
+	shuffle()
 }
